@@ -32,9 +32,11 @@ class CurrentRate extends StatelessWidget {
                   Expanded(
                     child: Column(children: [
                       const Text('Price:'),
-                      cryptoController.webSocketData?.priceOpen != null
+                      cryptoController.currentRate?.rate != null
+                          // cryptoController.webSocketData?.priceOpen != null
                           ? Text(
-                              '\$${cryptoController.webSocketData?.priceOpen.toStringAsFixed(2)}')
+                              // '\$${cryptoController.webSocketData?.priceOpen.toStringAsFixed(2)}')
+                              '\$${cryptoController.currentRate?.rate.toStringAsFixed(2)}')
                           : const Text(''),
                     ]),
                   ),
@@ -42,10 +44,13 @@ class CurrentRate extends StatelessWidget {
                     child: Column(
                       children: [
                         const Text('Time:'),
-                        cryptoController.webSocketData?.timeOpen != null
-                            ? Text(DateFormat.MMMd('en_US').add_jm().format(
-                                DateTime.parse(cryptoController.webSocketData!
-                                    .timeOpen!))) /*Text('Aug 7, 9:45 AM')*/
+                        cryptoController.currentRate?.time != null
+                            // cryptoController.webSocketData?.timeOpen != null
+                            ? Text(DateFormat.MMMd('en_US').add_Hm().format(
+                                DateTime.parse(
+                                    cryptoController.currentRate!.time!
+                                    // cryptoController.webSocketData!.timeOpen!
+                                    ))) /*Text('Aug 7, 9:45 AM')*/
                             : const Text(''),
                       ],
                     ),

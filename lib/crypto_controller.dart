@@ -47,7 +47,7 @@ class CryptoController extends GetxController {
   }
 
   Future getHistoryCurrencyRateByPair({required String pair}) async {
-    log.i('Get current currency rate  ...');
+    log.i('Get history currency rate  ...');
     await _cryptoProvider.getHistoryCurrencyRate(
       pair: pair,
       onSuccess: (data) async {
@@ -67,7 +67,7 @@ class CryptoController extends GetxController {
 
     channel = IOWebSocketChannel.connect(_api.webSocketUrl, headers: {});
     // sendHello();
-    listenClientWebSocket();
+    // await listenClientWebSocket();
   }
 
   Future closeConnect() async {
@@ -80,6 +80,7 @@ class CryptoController extends GetxController {
     print('----------Send Hello  to Client Socket ------->');
     channel?.sink.add(jsonEncode({
       "type": "hello",
+      // "message": "hello",
       "apikey": _api.apiKey,
       "heartbeat": false,
       "subscribe_data_type": ["ohlcv"],
@@ -95,7 +96,7 @@ class CryptoController extends GetxController {
     }
   }
 
-  listenClientWebSocket() {
+  Future listenClientWebSocket() async {
     channel?.stream.listen((rowData) {
       print(
           '$rowData reconnect after ${((DateTime.now().millisecondsSinceEpoch - second) / 1000).ceil()} seconds');
@@ -105,10 +106,11 @@ class CryptoController extends GetxController {
         webSocketData = WebSocketCryptoModel_ohlcv.fromJson(data);
         update();
       }
-    }, onDone: null)
-        // () => Future.delayed(Duration(milliseconds: 1000))
-        //     .then((_) => initConnect()))
-        ;
+    },
+        onDone:
+            // null)
+            () => Future.delayed(Duration(milliseconds: 1000))
+                .then((_) => initConnect()));
   }
 
   @override

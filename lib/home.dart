@@ -56,16 +56,19 @@ class HomeWidget extends StatelessWidget {
                               child: const Text('Subscribe'),
                             ),
                             onTap: () {
-                              // cryptoController.getCurrentCurrencyRateByPair(
-                              //     pair: pairController.text);
+                              cryptoController.getCurrentCurrencyRateByPair(
+                                  pair: cryptoController.pairController.text);
                               cryptoController.pair =
                                   cryptoController.pairController.text;
-                              cryptoController.closeConnect().then((value) =>
-                                  Future.delayed(
-                                      const Duration(milliseconds: 500),
-                                      () => cryptoController.initConnect().then(
-                                          (value) =>
-                                              cryptoController.sendHello())));
+                              // cryptoController.closeConnect().then((value) =>
+                              //     Future.delayed(
+                              //         const Duration(milliseconds: 500),
+                              //         () => cryptoController
+                              //             .initConnect()
+                              //             .then((value) =>
+                              //                 cryptoController.sendHello())
+                              //             .then((value) => cryptoController
+                              //                 .listenClientWebSocket())));
                               cryptoController.getHistoryCurrencyRateByPair(
                                   pair: cryptoController.pairController.text);
                             },

@@ -9,5 +9,5 @@ class AppUrlRequestKeys {
   static const String historyPeriod =
       '/history?period_id=1DAY&time_start=2022-02-01T00:00:00&time_end=2022-02-28T00:00:00';
   // WebSocket
-  static const String webSocketUrl = 'wss://ws.coinapi.io/v1';
+  static const String webSocketUrl = 'ws://ws.coinapi.io/v1';
 }
